@@ -1,9 +1,3 @@
-// 🔧 Outil de build du framework Plugo
-// - Lit plugo.config.js
-// - Génère plugo.css (lisible + commenté)
-// - Passe PostCSS (autoprefixer + cssnano) pour plugo.min.css
-// - Génère un petit rapport de build
-
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,8 +5,6 @@ import { fileURLToPath } from 'node:url';
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-
-import config from './plugo.config.js';
 
 import { buildTheme } from './src/theme/index.js';
 import { buildTypography } from './src/typography/index.js';
@@ -33,6 +25,16 @@ async function runBuild() {
     fs.mkdirSync(DIST_DIR, { recursive: true });
   }
 
+  let config;
+  try {
+    const configPath = path.resolve(process.cwd(), 'plugo.config.js');
+    const configModule = await import(configPath);
+    config = configModule.default;
+  } catch (e) {
+    console.error("⚠️ Impossible de charger 'plugo.config.js'. Assurez-vous d'être à la racine du projet.");
+    process.exit(1);
+  }
+
   const { theme, components, utilities, darkMode } = config;
 
   const themeCSS = buildTheme(theme, darkMode);
@@ -41,8 +43,7 @@ async function runBuild() {
   const componentsCSS = buildComponents(theme, components || []);
   const utilitiesCSS = buildUtilities(theme, utilities || []);
 
-  const banner = `/* 
-  🎨 Plugo CSS Framework
+  const banner = `/* 🎨 Plugo CSS Framework
   - Généré automatiquement à partir de plugo.config.js
   - Ne modifiez pas ce fichier directement : éditez la config puis relancez npm run build
 */\n\n`;
@@ -56,17 +57,19 @@ async function runBuild() {
     utilitiesCSS
   ].join('\n\n');
 
-  fs.writeFileSync(CSS_FILE, finalCSS, 'utf-8');
-
-  const prefixed = await postcss([autoprefixer]).process(finalCSS, {
+  console.log('⚙️  Traitement du CSS (Autoprefixer)...');
+  const prefixedResult = await postcss([autoprefixer]).process(finalCSS, {
     from: undefined
   });
-  fs.writeFileSync(CSS_FILE, prefixed.css, 'utf-8');
+  
+  fs.writeFileSync(CSS_FILE, prefixedResult.css, 'utf-8');
 
-  const minified = await postcss([autoprefixer, cssnano()]).process(finalCSS, {
+  console.log('📦 Minification (CSSNano)...');
+  const minifiedResult = await postcss([cssnano()]).process(prefixedResult.css, {
     from: undefined
   });
-  fs.writeFileSync(CSS_MIN_FILE, minified.css, 'utf-8');
+  
+  fs.writeFileSync(CSS_MIN_FILE, minifiedResult.css, 'utf-8');
 
   const report = buildReport({
     cssPath: CSS_FILE,
