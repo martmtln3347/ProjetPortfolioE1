@@ -18,17 +18,22 @@
         </div>
     </header>
 
-    <section class="hero container p-8 text-center">
-        <h1 class="text-primary text-4xl mb-4">John Doe</h1>
-        <h2 class="text-dark-2 text-2xl mb-6">Développeur Frontend & Intégrateur</h2>
-        <p class="text-dark-2 mb-8" style="max-width: 600px; margin: 0 auto 2rem;">
-            Passionné par la création d'interfaces web modernes et accessibles. 
-            Je transforme vos maquettes en code propre et performant.
-        </p>
-        <a href="#projects" class="btn is-primary">Voir mes projets</a>
-        <a href="#contact" class="btn">Me contacter</a>
+    <section class="hero-section bg-primary-gradient text-white flex flex-center flex-col p-8">
+        <div class="container text-center py-16 md:py-24">
+            <h1 class="text-white text-5xl md:text-6xl font-extrabold mb-4">John Doe</h1>
+            <h2 class="text-white text-2xl md:text-3xl font-light mb-6">Développeur Frontend & Intégrateur</h2>
+            <p class="text-white text-lg mb-8" style="max-width: 700px; margin: 0 auto 2rem;">
+                Passionné par la création d'interfaces web modernes et accessibles. 
+                Je transforme vos maquettes en code propre et performant.
+            </p>
+            
+            <div class="flex flex-center gap-4">
+                <a href="#projects" class="btn btn-hero-mode">Voir mes projets</a>
+                <a href="#contact" class="btn btn-hero-mode">Me contacter</a>
+            </div>
+        </div>
     </section>
-
+    
     <hr class="container my-8" style="border-color: var(--light-2);">
 
     <section id="projects" class="container p-4">
@@ -40,9 +45,9 @@
             
             <div class="filters flex gap-2">
                 <button class="btn filter-btn is-primary" data-filter="all">Tous</button>
-                <button class="btn filter-btn" data-filter="vitrine">Vitrine</button>
-                <button class="btn filter-btn" data-filter="application">Application</button>
-                <button class="btn filter-btn" data-filter="ecole">École</button>
+                <button class="btn filter-btn is-outlined" data-filter="vitrine">Vitrine</button>
+                <button class="btn filter-btn is-outlined" data-filter="application">Application</button>
+                <button class="btn filter-btn is-outlined" data-filter="ecole">École</button>
             </div>
         </div>
 
@@ -70,7 +75,7 @@
     </section>
 
     <footer class="text-center p-8 text-dark-2 mt-8">
-        &copy; 2025 John Doe - Portfolio Anonymisé - Propulsé par Plugo Framework
+        &copy; 2025 John Doe - Portfolio Anonymisé
     </footer>
 
     <script src="main.js"></script>

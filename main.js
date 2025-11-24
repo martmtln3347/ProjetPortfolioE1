@@ -1,4 +1,3 @@
-// 🔧 Configuration & Sélecteurs
 const projectsContainer = document.getElementById('projects-list');
 const searchInput = document.getElementById('search-input');
 const filterButtons = document.querySelectorAll('.filter-btn');
@@ -7,10 +6,12 @@ const contactForm = document.getElementById('contact-form');
 
 let allProjects = [];
 
-// 1. Gestion du Dark Mode (LocalStorage)
+// Majuscule 1ère lettre
+const capitalize = (str) => str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+
+// Dark Mode
 function initTheme() {
     const savedTheme = localStorage.getItem('theme');
-    // Si 'dark', on ajoute la classe (gérée par Plugo : .dark-mode)
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
     }
@@ -22,7 +23,7 @@ themeToggleBtn.addEventListener('click', () => {
     localStorage.setItem('theme', currentTheme);
 });
 
-// 2. Chargement des projets via AJAX (Fetch)
+// Chargement Projets
 async function loadProjects() {
     try {
         const response = await fetch('projects.json');
@@ -35,7 +36,7 @@ async function loadProjects() {
     }
 }
 
-// 3. Rendu des projets (Utilisation du composant Card de Plugo)
+// Rendu
 function renderProjects(projects) {
     projectsContainer.innerHTML = '';
 
@@ -45,29 +46,49 @@ function renderProjects(projects) {
     }
 
     projects.forEach(project => {
-        // On crée une string HTML en utilisant les classes Plugo (.card, .text-primary...)
         const cardHTML = `
             <article class="card">
-                <img src="${project.image}" alt="${project.title}" style="width:100%; border-radius: 4px 4px 0 0;">
+                <img src="${project.image}" alt="${project.title}">
                 <div class="p-4">
-                    <span class="text-xs font-bold text-primary uppercase tracking-wide">${project.type}</span>
-                    <h4 class="text-xl text-dark-1 my-2">${project.title}</h4>
-                    <p class="text-dark-2 mb-4 text-sm">${project.description}</p>
-                    <button class="btn is-primary w-full">Voir détails</button>
+                    <span class="text-xs font-bold text-primary uppercase tracking-wide">
+                        ${capitalize(project.type)}
+                    </span>
+                    <h4 class="text-xl text-dark-1 my-2 font-bold">${project.title}</h4>
+                    
+                    <p class="project-desc text-dark-2 mb-4 text-sm" style="display:none;">
+                        ${project.description}
+                    </p>
+                    
+                    <button class="btn is-primary w-full view-details-btn">Voir détails</button>
                 </div>
             </article>
         `;
         projectsContainer.insertAdjacentHTML('beforeend', cardHTML);
     });
+
+    // Gestion boutons "Voir détails"
+    document.querySelectorAll('.view-details-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const desc = e.target.previousElementSibling;
+            if (desc.style.display === 'none') {
+                desc.style.display = 'block';
+                e.target.textContent = 'Masquer détails';
+            } else {
+                desc.style.display = 'none';
+                e.target.textContent = 'Voir détails';
+            }
+        });
+    });
 }
 
-// 4. Système de Filtrage
+// Filtres
 function filterProjects(category) {
-    // Mise à jour visuelle des boutons
     filterButtons.forEach(btn => {
         if (btn.dataset.filter === category) {
+            btn.classList.remove('is-outlined');
             btn.classList.add('is-primary');
         } else {
+            btn.classList.add('is-outlined');
             btn.classList.remove('is-primary');
         }
     });
@@ -86,7 +107,7 @@ filterButtons.forEach(btn => {
     });
 });
 
-// 5. Système de Recherche (Titre, description ou type)
+// Recherche
 searchInput.addEventListener('input', (e) => {
     const term = e.target.value.toLowerCase();
     const searchResults = allProjects.filter(project => {
@@ -99,13 +120,11 @@ searchInput.addEventListener('input', (e) => {
     renderProjects(searchResults);
 });
 
-// 6. Formulaire de contact (Simulation)
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     alert('Merci John Doe (simulation) ! Votre message a bien été "envoyé".');
     contactForm.reset();
 });
 
-// Initialisation
 initTheme();
 loadProjects();

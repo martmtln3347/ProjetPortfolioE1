@@ -1,4 +1,6 @@
-/* Ajustements pour le layout global */
+/* =========================================
+   Styles Globaux & Layout
+   ========================================= */
 html {
     scroll-behavior: smooth;
 }
@@ -6,34 +8,130 @@ html {
 body {
     transition: background-color 0.3s ease, color 0.3s ease;
     background-color: var(--bg-light, #ffffff); 
+    color: var(--text-dark-1, #111827); 
 }
 
-/* Gestion du Dark Mode pour le body (variables non définies dans Plugo button.js mais supposées) */
+/* =========================================
+   Gestion du Dark Mode
+   ========================================= */
 body.dark-mode {
-    background-color: var(--dark-1, #111827);
+    background-color: #111827; 
+    color: #ffffff; 
 }
 
-/* Grille responsive basique si Plugo layout ne l'a pas générée parfaitement */
-#projects-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+body.dark-mode .text-dark-1,
+body.dark-mode .text-dark-2 {
+    color: #f3f4f6 !important;
 }
 
-/* Inputs stylisés pour matcher Plugo */
-input, textarea {
-    background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
-    color: #111;
-}
-
-.dark-mode input, 
-.dark-mode textarea {
-    background-color: #1f2937;
+body.dark-mode .bg-white,
+body.dark-mode .bg-light-1,
+body.dark-mode .card {
+    background-color: #1f2937 !important; 
     border-color: #374151;
+}
+
+body.dark-mode input, 
+body.dark-mode textarea {
+    background-color: #374151;
+    border-color: #4b5563;
     color: #fff;
+}
+
+.logo {
+    color: var(--primary) !important;
+}
+
+/* =========================================
+   SECTION HERO (Boutons IDENTIQUES)
+   ========================================= */
+.hero-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.bg-primary-gradient {
+    background: linear-gradient(135deg, var(--primary, #6e52f7), #a68bf2);
+}
+
+/* --- STYLE UNIQUE POUR LES DEUX BOUTONS DU HERO --- */
+.btn-hero-mode {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    
+    /* Dimensions et Police */
+    padding: 0.75rem 2rem !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    min-width: 200px; /* Largeur fixe pour qu'ils soient égaux */
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    
+    /* Couleurs : Fond Blanc, Texte Violet */
+    background-color: #ffffff !important;
+    color: var(--primary, #6e52f7) !important;
+    border: 2px solid #ffffff !important;
+    
+    /* Transition */
+    transition: transform 0.2s ease, filter 0.2s ease !important;
+}
+
+/* Effet au survol (le même pour les deux) */
+.btn-hero-mode:hover {
+    filter: brightness(0.95); /* Devient légèrement gris */
+    transform: translateY(-3px); /* Monte un peu */
+}
+
+/* =========================================
+   Composants (Cards, Filtres...)
+   ========================================= */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    height: 220px;
+    object-fit: cover;
+    width: 100%;
 }
 
 .filters .btn {
     border: 1px solid var(--primary);
+}
+
+.filters .btn.is-outlined {
+    background-color: transparent;
+    color: var(--primary);
+}
+.filters .btn.is-outlined:hover {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+body.dark-mode .filters .btn.is-outlined {
+    color: #a68bf2;
+    border-color: #a68bf2;
+}
+body.dark-mode .filters .btn.is-outlined:hover {
+    background-color: #a68bf2;
+    color: #111;
+}
+
+input, textarea {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    color: #111;
 }
