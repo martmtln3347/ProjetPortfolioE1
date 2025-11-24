@@ -1,0 +1,14 @@
+{
+  "name": "plugo",
+  "version": "1.1.0",
+  "description": "Outil de build CSS pour le micro-framework Plugo",
+  "type": "module",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^6.1.2",
+    "postcss": "^8.4.47"
+  }
+}
