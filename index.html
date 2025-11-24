@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe - Développeur Frontend</title>
+    <link rel="stylesheet" href="./dist/plugo.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="bg-white text-dark-1">
+        <div class="container flex flex-between flex-center p-4">
+            <div class="logo font-bold text-primary text-xl">John Doe.</div>
+            <nav class="flex gap-4">
+                <button id="theme-toggle" class="btn">🌓 Mode</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero container p-8 text-center">
+        <h1 class="text-primary text-4xl mb-4">John Doe</h1>
+        <h2 class="text-dark-2 text-2xl mb-6">Développeur Frontend & Intégrateur</h2>
+        <p class="text-dark-2 mb-8" style="max-width: 600px; margin: 0 auto 2rem;">
+            Passionné par la création d'interfaces web modernes et accessibles. 
+            Je transforme vos maquettes en code propre et performant.
+        </p>
+        <a href="#projects" class="btn is-primary">Voir mes projets</a>
+        <a href="#contact" class="btn">Me contacter</a>
+    </section>
+
+    <hr class="container my-8" style="border-color: var(--light-2);">
+
+    <section id="projects" class="container p-4">
+        <h3 class="text-3xl text-primary mb-6">Mes Réalisations</h3>
+
+        <div class="flex flex-wrap gap-4 mb-8 flex-center">
+            <input type="text" id="search-input" placeholder="Rechercher un projet..." 
+                   class="p-2 border rounded" style="border: 1px solid var(--light-2);">
+            
+            <div class="filters flex gap-2">
+                <button class="btn filter-btn is-primary" data-filter="all">Tous</button>
+                <button class="btn filter-btn" data-filter="vitrine">Vitrine</button>
+                <button class="btn filter-btn" data-filter="application">Application</button>
+                <button class="btn filter-btn" data-filter="ecole">École</button>
+            </div>
+        </div>
+
+        <div id="projects-list" class="grid-cols-3 gap-4" style="display: grid; gap: 2rem;">
+            </div>
+    </section>
+
+    <section id="contact" class="container p-8 mt-8 bg-light-1 rounded">
+        <h3 class="text-3xl text-primary mb-4">Me contacter</h3>
+        <form id="contact-form" class="flex flex-col gap-4" style="max-width: 500px;">
+            <label class="text-dark-1">
+                Nom
+                <input type="text" required class="w-full p-2 border rounded mt-1">
+            </label>
+            <label class="text-dark-1">
+                Email
+                <input type="email" required class="w-full p-2 border rounded mt-1">
+            </label>
+            <label class="text-dark-1">
+                Message
+                <textarea rows="4" required class="w-full p-2 border rounded mt-1"></textarea>
+            </label>
+            <button type="submit" class="btn is-success">Envoyer le message</button>
+        </form>
+    </section>
+
+    <footer class="text-center p-8 text-dark-2 mt-8">
+        &copy; 2025 John Doe - Portfolio Anonymisé - Propulsé par Plugo Framework
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

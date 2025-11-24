@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Site Vitrine Boulangerie",
+    "description": "Création d'une identité visuelle et d'un site statique pour un artisan local.",
+    "type": "vitrine",
+    "image": "https://placehold.co/600x400/6e52f7/ffffff?text=Boulangerie"
+  },
+  {
+    "id": 2,
+    "title": "Task Manager App",
+    "description": "Application de gestion de tâches en JavaScript pur avec localStorage.",
+    "type": "application",
+    "image": "https://placehold.co/600x400/78ffcb/111827?text=Task+App"
+  },
+  {
+    "id": 3,
+    "title": "Portfolio Étudiant",
+    "description": "Premier projet d'école réalisé en HTML et CSS sans framework.",
+    "type": "ecole",
+    "image": "https://placehold.co/600x400/ffdb63/111827?text=School+Project"
+  },
+  {
+    "id": 4,
+    "title": "E-commerce Dashboard",
+    "description": "Interface d'administration responsive avec graphiques.",
+    "type": "application",
+    "image": "https://placehold.co/600x400/ff5e78/ffffff?text=Dashboard"
+  }
+]

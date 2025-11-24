@@ -1,0 +1,39 @@
+/* Ajustements pour le layout global */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: var(--bg-light, #ffffff); 
+}
+
+/* Gestion du Dark Mode pour le body (variables non définies dans Plugo button.js mais supposées) */
+body.dark-mode {
+    background-color: var(--dark-1, #111827);
+}
+
+/* Grille responsive basique si Plugo layout ne l'a pas générée parfaitement */
+#projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Inputs stylisés pour matcher Plugo */
+input, textarea {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    color: #111;
+}
+
+.dark-mode input, 
+.dark-mode textarea {
+    background-color: #1f2937;
+    border-color: #374151;
+    color: #fff;
+}
+
+.filters .btn {
+    border: 1px solid var(--primary);
+}
